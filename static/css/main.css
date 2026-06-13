@@ -62,10 +62,18 @@
     --breakpoint-desktop: 1024px;
 }
 
-* {
+*, *::before, *::after {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+    background: #121212;
+    border: none;
+    outline: none;
 }
 
 body {
@@ -123,6 +131,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: var(--font-weight-bold);
     line-height: 1.2;
     letter-spacing: -0.02em;
+    font-family: system-ui, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 h1 {

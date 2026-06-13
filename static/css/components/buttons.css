@@ -22,9 +22,14 @@
 
 /* Primary button - Spotify Green */
 .btn-primary {
-    background-color: var(--color-spotify-green);
+    background-color: #1ED760;
     color: #000000;
+    font-weight: 700;
+    border-radius: 500px;
+    padding: 14px 40px;
+    font-size: 16px;
     border: none;
+    text-decoration: none;
 }
 
 .btn-primary:hover:not(:disabled) {

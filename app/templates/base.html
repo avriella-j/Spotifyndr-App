@@ -14,12 +14,10 @@
     <!-- Mobile Header -->
     <header class="mobile-header">
         <a href="{{ url_for('main.index') }}" class="mobile-header-logo">Spotifyndr</a>
-        <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
-            </svg>
+        <button class="menu-toggle burger-btn" id="menu-toggle" aria-label="Menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
         </button>
     </header>
 
@@ -131,6 +129,7 @@
             if (menuToggle && mobileNavMenu) {
                 menuToggle.addEventListener('click', function() {
                     mobileNavMenu.classList.toggle('open');
+                    menuToggle.classList.toggle('open');
                 });
 
                 // Close menu when clicking outside

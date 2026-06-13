@@ -4,237 +4,256 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spotifyndr - Discover Music Together</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/components/buttons.css') }}">
     <style>
-        .landing-page {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            background-color: var(--color-primary-background);
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            background: #121212;
+            color: #ffffff;
+            font-family: system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            border: none;
+            outline: none;
+            overflow-x: hidden;
         }
 
+        /* ── NAV ── */
         .landing-header {
-            padding: var(--spacing-lg) var(--spacing-2xl);
+            padding: 16px 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--color-hover-state);
             position: sticky;
             top: 0;
-            background-color: var(--color-primary-background);
+            background: #121212;
             z-index: 100;
         }
 
         .landing-logo {
-            font-size: var(--font-size-2xl);
-            font-weight: var(--font-weight-bold);
-            color: var(--color-accent);
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .landing-nav {
             display: flex;
             align-items: center;
-            gap: var(--spacing-lg);
+            gap: 8px;
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
         }
 
-        .burger-menu {
-            position: relative;
-        }
+        /* ── BURGER ── */
+        .burger-menu { position: relative; }
 
-        .burger-button {
+        .burger-btn {
             background: none;
             border: none;
-            font-size: var(--font-size-2xl);
-            color: var(--color-text-primary);
             cursor: pointer;
-            padding: var(--spacing-sm);
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
         }
+
+        .bar {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: #ffffff;
+            border-radius: 2px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .burger-btn.open .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .burger-btn.open .bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .burger-btn.open .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
         .burger-dropdown {
             position: absolute;
-            top: 100%;
+            top: calc(100% + 8px);
             right: 0;
-            background-color: var(--color-elevated-card);
-            border-radius: var(--border-radius-md);
-            border: 1px solid var(--color-hover-state);
-            min-width: 200px;
-            display: none;
-            flex-direction: column;
-            box-shadow: var(--shadow-lg);
+            background: #282828;
+            border-radius: 8px;
+            border: 1px solid #2a2a2a;
+            min-width: 180px;
+            padding: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+            opacity: 0;
+            transform: translateY(-8px);
+            pointer-events: none;
+            transition: opacity 0.2s ease, transform 0.2s ease;
             z-index: 1000;
         }
 
         .burger-dropdown.active {
-            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: all;
         }
 
         .burger-dropdown a {
-            padding: var(--spacing-md);
-            color: var(--color-text-primary);
+            display: block;
+            padding: 12px 16px;
+            border-radius: 8px;
+            color: #ffffff;
             text-decoration: none;
-            transition: background-color var(--transition-fast);
+            font-size: 15px;
+            font-weight: 500;
+            transition: background 0.15s ease;
         }
 
-        .burger-dropdown a:hover {
-            background-color: var(--color-hover-state);
-        }
+        .burger-dropdown a:hover { background: #3a3a3a; }
 
+        /* ── HERO ── */
         .hero {
-            flex: 1;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
             text-align: center;
-            padding: var(--spacing-2xl);
+            padding: 80px 32px 64px;
         }
 
         .hero h1 {
-            font-size: var(--font-size-3xl);
-            font-weight: var(--font-weight-bold);
-            margin-bottom: var(--spacing-lg);
-            color: var(--color-text-primary);
+            font-size: 48px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
         }
 
         .hero p {
-            font-size: var(--font-size-lg);
-            color: var(--color-text-secondary);
-            margin-bottom: var(--spacing-2xl);
-            max-width: 600px;
+            font-size: 18px;
+            color: #b3b3b3;
+            margin-bottom: 40px;
+            max-width: 520px;
+            line-height: 1.6;
         }
 
+        .btn-landing {
+            display: inline-block;
+            background: #1ED760;
+            color: #000000;
+            font-weight: 700;
+            font-size: 16px;
+            border-radius: 500px;
+            padding: 14px 40px;
+            text-decoration: none;
+            transition: filter 0.15s ease, transform 0.15s ease;
+        }
+
+        .btn-landing:hover {
+            filter: brightness(1.08);
+            transform: scale(1.03);
+        }
+
+        /* ── FEATURES ── */
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--spacing-lg);
-            padding: var(--spacing-2xl);
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            padding: 0 32px 80px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .feature {
-            background-color: var(--color-elevated-card);
-            padding: var(--spacing-lg);
-            border-radius: var(--border-radius-lg);
+            background: #181818;
+            padding: 32px 24px;
+            border-radius: 8px;
             text-align: center;
-            transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+            transition: background 0.2s ease, transform 0.2s ease;
         }
 
         .feature:hover {
+            background: #282828;
             transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-icon {
+            font-size: 36px;
+            margin-bottom: 16px;
+            display: block;
         }
 
         .feature h3 {
-            font-size: var(--font-size-xl);
-            font-weight: var(--font-weight-semibold);
-            margin-bottom: var(--spacing-md);
-            color: var(--color-text-primary);
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 10px;
         }
 
         .feature p {
-            color: var(--color-text-secondary);
+            font-size: 14px;
+            color: #b3b3b3;
+            line-height: 1.5;
         }
 
-        :root {
-    --color-primary-background: #121212;
-    --color-secondary-background: #181818;
-    --color-elevated-card: #282828;
-    --color-hover-state: #3e3e3e;
-    --color-text-primary: #ffffff;
-    --color-text-secondary: #b3b3b3;
-    --color-text-muted: #727272;
-    --color-accent: #1ED760;
-    --font-size-xs: 0.75rem;
-    --font-size-sm: 0.875rem;
-    --font-size-md: 1rem;
-    --font-size-lg: 1.125rem;
-    --font-size-xl: 1.25rem;
-    --font-size-2xl: 1.5rem;
-    --font-size-3xl: 2rem;
-    --font-weight-normal: 400;
-    --font-weight-medium: 500;
-    --font-weight-semibold: 600;
-    --font-weight-bold: 700;
-    --spacing-sm: 0.5rem;
-    --spacing-md: 1rem;
-    --spacing-lg: 1.5rem;
-    --spacing-2xl: 2rem;
-    --border-radius-md: 0.5rem;
-    --border-radius-lg: 0.75rem;
-    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.5);
-    --transition-fast: 150ms ease;
-    --transition-normal: 300ms ease;
-}
-
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: var(--font-size-2xl);
-            }
-
-            .features {
-                grid-template-columns: 1fr;
-            }
+            .hero h1 { font-size: 32px; }
+            .features { grid-template-columns: 1fr; padding: 0 16px 48px; }
+            .landing-header { padding: 16px; }
         }
     </style>
 </head>
 <body>
-    <div class="landing-page">
-        <header class="landing-header">
-            <a href="{{ url_for('main.index') }}" class="landing-logo">Spotifyndr</a>
-            <div class="landing-nav">
-                <div class="burger-menu">
-                    <button class="burger-button" id="burger-toggle">☰</button>
-                    <div class="burger-dropdown" id="burger-dropdown">
-                        <a href="{{ url_for('main.about') }}">About</a>
-                        <a href="{{ url_for('main.support') }}">Support</a>
-                    </div>
-                </div>
+    <header class="landing-header">
+        <a href="/" class="landing-logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="12" fill="#1ED760"/>
+                <path d="M17.9 10.9C14.7 9 9.35 8.8 6.3 9.75c-.5.15-1-.15-1.15-.6-.15-.5.15-1 .6-1.15 3.55-1.05 9.4-.85 13.1 1.35.45.25.6.85.35 1.3-.25.35-.85.5-1.3.25zm-.1 2.8c-.25.4-.75.5-1.15.25-2.7-1.65-6.8-2.15-9.95-1.15-.4.1-.85-.1-.95-.5-.1-.4.1-.85.5-.95 3.65-1.1 8.15-.55 11.25 1.35.35.15.45.65.3 1zm-1.3 2.75c-.2.3-.6.4-.9.2-2.35-1.45-5.35-1.75-8.85-.95-.35.1-.65-.15-.75-.45-.1-.35.15-.65.45-.75 3.85-.85 7.15-.5 9.75 1.1.3.15.4.55.3.85z" fill="#000"/>
+            </svg>
+            Spotifyndr
+        </a>
+        <div class="burger-menu">
+            <button class="burger-btn" id="burger-toggle" aria-label="Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <div class="burger-dropdown" id="burger-dropdown">
+                <a href="/about">About</a>
+                <a href="/support">Support</a>
             </div>
-        </header>
+        </div>
+    </header>
 
-        <section class="hero">
-            <h1>Discover Music Together</h1>
-            <p>Connect with people who share your music taste through AI-powered recommendations</p>
-            <a href="{{ url_for('auth.login') }}" class="btn btn-primary">Sign in with Spotify</a>
-        </section>
+    <section class="hero">
+        <h1>Discover Music Together</h1>
+        <p>Connect with people who share your music taste through AI-powered recommendations</p>
+        <a href="/auth/login" class="btn-landing">Sign in with Spotify</a>
+    </section>
 
-        <section class="features">
-            <div class="feature">
-                <h3>Personalized Recommendations</h3>
-                <p>ML-powered music suggestions based on your taste</p>
-            </div>
-            <div class="feature">
-                <h3>Find Your Music Tribe</h3>
-                <p>Connect with people who love the same artists</p>
-            </div>
-            <div class="feature">
-                <h3>Real-time Messaging</h3>
-                <p>Chat and share music with friends instantly</p>
-            </div>
-        </section>
-    </div>
+    <section class="features">
+        <div class="feature">
+            <span class="feature-icon">🎵</span>
+            <h3>Personalized Recommendations</h3>
+            <p>ML-powered music suggestions based on your taste</p>
+        </div>
+        <div class="feature">
+            <span class="feature-icon">👥</span>
+            <h3>Find Your Music Tribe</h3>
+            <p>Connect with people who love the same artists</p>
+        </div>
+        <div class="feature">
+            <span class="feature-icon">💬</span>
+            <h3>Real-time Messaging</h3>
+            <p>Chat and share music with friends instantly</p>
+        </div>
+    </section>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const burgerToggle = document.getElementById('burger-toggle');
-            const burgerDropdown = document.getElementById('burger-dropdown');
+        const toggle = document.getElementById('burger-toggle');
+        const dropdown = document.getElementById('burger-dropdown');
 
-            if (burgerToggle && burgerDropdown) {
-                burgerToggle.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    burgerDropdown.classList.toggle('active');
-                });
+        toggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggle.classList.toggle('open');
+            dropdown.classList.toggle('active');
+        });
 
-                document.addEventListener('click', function(event) {
-                    const burgerMenu = document.querySelector('.burger-menu');
-                    if (!burgerMenu.contains(event.target)) {
-                        burgerDropdown.classList.remove('active');
-                    }
-                });
+        document.addEventListener('click', function(e) {
+            if (!toggle.contains(e.target) && !dropdown.contains(e.target)) {
+                toggle.classList.remove('open');
+                dropdown.classList.remove('active');
             }
         });
     </script>
