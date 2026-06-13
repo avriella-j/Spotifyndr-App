@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spotifyndr - Discover Music Together</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/components/buttons.css') }}">
     <style>
@@ -150,7 +147,7 @@
     --color-text-primary: #ffffff;
     --color-text-secondary: #b3b3b3;
     --color-text-muted: #727272;
-    --color-accent: #2ECC71;
+    --color-accent: #1ED760;
     --font-size-xs: 0.75rem;
     --font-size-sm: 0.875rem;
     --font-size-md: 1rem;
@@ -190,7 +187,7 @@
             <a href="{{ url_for('main.index') }}" class="landing-logo">Spotifyndr</a>
             <div class="landing-nav">
                 <div class="burger-menu">
-                    <button> class="burger-button" id="burger-toggle">☰</button>
+                    <button class="burger-button" id="burger-toggle">☰</button>
                     <div class="burger-dropdown" id="burger-dropdown">
                         <a href="{{ url_for('main.about') }}">About</a>
                         <a href="{{ url_for('main.support') }}">Support</a>
@@ -222,14 +219,22 @@
     </div>
 
     <script>
-        document.getElementById('burger-toggle').addEventListener('click', function() {
-            document.getElementById('burger-dropdown').classList.toggle('active');
-        });
+        document.addEventListener('DOMContentLoaded', function() {
+            const burgerToggle = document.getElementById('burger-toggle');
+            const burgerDropdown = document.getElementById('burger-dropdown');
 
-        document.addEventListener('click', function(event) {
-            const burgerMenu = document.querySelector('.burger-menu');
-            if (!burgerMenu.contains(event.target)) {
-                document.getElementById('burger-dropdown').classList.remove('active');
+            if (burgerToggle && burgerDropdown) {
+                burgerToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    burgerDropdown.classList.toggle('active');
+                });
+
+                document.addEventListener('click', function(event) {
+                    const burgerMenu = document.querySelector('.burger-menu');
+                    if (!burgerMenu.contains(event.target)) {
+                        burgerDropdown.classList.remove('active');
+                    }
+                });
             }
         });
     </script>
