@@ -10,6 +10,18 @@ def index():
     return render_template('landing.html')
 
 
+@main_bp.route('/about')
+def about():
+    """About page."""
+    return render_template('about.html')
+
+
+@main_bp.route('/support')
+def support():
+    """Support page."""
+    return render_template('support.html')
+
+
 @main_bp.route('/home')
 @login_required
 def home():

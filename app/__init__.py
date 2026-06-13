@@ -40,6 +40,7 @@ def create_app(config_name='default'):
     from app.views.messaging import messaging_bp
     from app.views.profile import profile_bp
     from app.views.settings import settings_bp
+    from app.views.detail import detail_bp
     
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(api_bp, url_prefix='/api/v1')
@@ -50,6 +51,7 @@ def create_app(config_name='default'):
     app.register_blueprint(messaging_bp, url_prefix='/messaging')
     app.register_blueprint(profile_bp, url_prefix='/profile')
     app.register_blueprint(settings_bp, url_prefix='/settings')
+    app.register_blueprint(detail_bp)
     
     # Register SocketIO events
     from app.sockets.events import register_socket_events

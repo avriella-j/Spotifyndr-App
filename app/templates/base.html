@@ -4,24 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Spotifyndr{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components/navigation.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components/cards.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components/buttons.css') }}">
     {% block extra_css %}{% endblock %}
 </head>
 <body>
-    {% include 'partials/_nav_sidebar.html' %}
-    {% include 'partials/_nav_mobile.html' %}
-    
-    <main>
-        {% block content %}{% endblock %}
-    </main>
-    
+    <div class="app-layout">
+        <!-- Main Content -->
+        <main class="main-content">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    <!-- Bottom Navigation (Authenticated Users) -->
+    <nav class="bottom-nav" aria-label="Bottom navigation">
+        <ul class="bottom-nav-items">
+            <li><a href="{{ url_for('explore.explore') }}" class="bottom-nav-item">
+                <span class="bottom-nav-icon">🔍</span>
+                <span>Explore</span>
+            </a></li>
+            <li><a href="{{ url_for('fyp.fyp') }}" class="bottom-nav-item">
+                <span class="bottom-nav-icon">🎵</span>
+                <span>For You</span>
+            </a></li>
+            <li><a href="{{ url_for('mutuals.mutuals') }}" class="bottom-nav-item">
+                <span class="bottom-nav-icon">�</span>
+                <span>Mutuals</span>
+            </a></li>
+            <li><a href="{{ url_for('messaging.messaging') }}" class="bottom-nav-item">
+                <span class="bottom-nav-icon">💬</span>
+                <span>Messages</span>
+            </a></li>
+            <li><a href="{{ url_for('profile.profile') }}" class="bottom-nav-item">
+                <span class="bottom-nav-icon">👤</span>
+                <span>Profile</span>
+            </a></li>
+        </ul>
+    </nav>
+
     {% include 'partials/_toast.html' %}
-    
+
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
     <script src="{{ url_for('static', filename='js/core/socket.js') }}"></script>
     <script src="{{ url_for('static', filename='js/core/api.js') }}"></script>
     <script src="{{ url_for('static', filename='js/core/toast.js') }}"></script>
     <script src="{{ url_for('static', filename='js/core/utils.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     {% block extra_js %}{% endblock %}
 </body>
 </html>

@@ -1,78 +1,63 @@
-/* Navigation components */
-.nav-sidebar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 250px;
-    height: 100vh;
-    background-color: var(--color-surface);
-    padding: var(--spacing-lg);
+/* Navigation components - Single column layout with bottom navigation */
+.app-layout {
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
 }
 
-.nav-brand img {
-    width: 120px;
-    margin-bottom: var(--spacing-xl);
-}
-
-.nav-links {
-    list-style: none;
+.main-content {
+    background-color: var(--color-primary-background);
+    padding: var(--spacing-2xl);
+    padding-bottom: 100px;
+    overflow-y: auto;
     flex: 1;
 }
 
-.nav-links li {
-    margin-bottom: var(--spacing-sm);
+/* Bottom Navigation (Authenticated Users) */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--color-secondary-background);
+    border-top: 1px solid var(--color-hover-state);
+    padding: var(--spacing-sm);
+    z-index: 1000;
 }
 
-.nav-link {
-    display: block;
-    padding: var(--spacing-sm) var(--spacing-md);
-    border-radius: var(--border-radius-sm);
-    transition: background-color var(--transition-fast);
+.bottom-nav-items {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
-.nav-link:hover {
-    background-color: var(--color-border);
+.bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--spacing-sm);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+    text-decoration: none;
+    transition: color var(--transition-fast);
 }
 
-.nav-footer {
-    margin-top: var(--spacing-lg);
+.bottom-nav-item:hover,
+.bottom-nav-item.active {
+    color: var(--color-accent);
 }
 
-.nav-mobile {
-    display: none;
+.bottom-nav-icon {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-xs);
 }
 
+/* Responsive Breakpoints */
 @media (max-width: 768px) {
-    .nav-sidebar {
-        display: none;
-    }
-    
-    .nav-mobile {
-        display: block;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        background-color: var(--color-surface);
-        padding: var(--spacing-md);
-        z-index: 1000;
-    }
-    
-    .nav-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    
-    .nav-menu {
-        display: none;
-        list-style: none;
-        margin-top: var(--spacing-md);
-    }
-    
-    .nav-menu.active {
-        display: block;
+    .main-content {
+        padding: var(--spacing-lg);
+        padding-bottom: 100px;
     }
 }

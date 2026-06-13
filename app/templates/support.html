@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - Spotifyndr</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components/buttons.css') }}">
+    <style>
+        .support-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--color-primary-background);
+            padding: var(--spacing-2xl);
+        }
+
+        .support-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-2xl);
+            padding-bottom: var(--spacing-lg);
+            border-bottom: 1px solid var(--color-hover-state);
+        }
+
+        .support-logo {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+
+        .support-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .support-content h1 {
+            font-size: var(--font-size-3xl);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--spacing-lg);
+            color: var(--color-text-primary);
+        }
+
+        .support-content h2 {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-semibold);
+            margin-top: var(--spacing-2xl);
+            margin-bottom: var(--spacing-md);
+            color: var(--color-text-primary);
+        }
+
+        .support-content p {
+            color: var(--color-text-secondary);
+            line-height: 1.8;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .faq-item {
+            background-color: var(--color-elevated-card);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius-lg);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .faq-item h3 {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-semibold);
+            margin-bottom: var(--spacing-sm);
+            color: var(--color-text-primary);
+        }
+
+        .faq-item p {
+            color: var(--color-text-secondary);
+            margin-bottom: 0;
+        }
+
+        .contact-form {
+            background-color: var(--color-elevated-card);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius-lg);
+            margin-top: var(--spacing-2xl);
+        }
+
+        .form-group {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: var(--spacing-sm);
+            font-weight: var(--font-weight-medium);
+            color: var(--color-text-primary);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: 1px solid var(--color-hover-state);
+            border-radius: var(--border-radius-md);
+            background-color: var(--color-secondary-background);
+            color: var(--color-text-primary);
+            font-size: var(--font-size-md);
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-accent);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        .back-button:hover {
+            color: var(--color-text-primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="support-page">
+        <header class="support-header">
+            <a href="{{ url_for('main.index') }}" class="support-logo">Spotifyndr</a>
+            <a href="{{ url_for('main.index') }}" class="back-button">← Back</a>
+        </header>
+
+        <div class="support-content">
+            <h1>Support</h1>
+            <p>
+                Need help? Check out our frequently asked questions or get in touch with our support team.
+            </p>
+
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <h3>How do I connect my Spotify account?</h3>
+                <p>Click the "Sign in with Spotify" button on the landing page. You'll be redirected to Spotify's authorization page where you can grant Spotifyndr access to your music profile.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>What data does Spotifyndr access?</h3>
+                <p>We access your top artists, top tracks, and recently played music to find users with similar taste. We never access your password or payment information.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>How do I revoke Spotifyndr's access?</h3>
+                <p>You can revoke access at any time through your Spotify account settings under "Apps". This won't delete your Spotifyndr account but will stop data syncing.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>How are recommendations generated?</h3>
+                <p>We use machine learning algorithms (KNN similarity and logistic regression) to analyze your music profile and find users with similar taste. The more you use the app, the better recommendations become.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Can I delete my account?</h3>
+                <p>Yes, you can delete your account from the Settings page. This will permanently delete your data from our servers.</p>
+            </div>
+
+            <h2>Contact Us</h2>
+            <p>Can't find what you're looking for? Send us a message and we'll get back to you as soon as possible.</p>
+
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

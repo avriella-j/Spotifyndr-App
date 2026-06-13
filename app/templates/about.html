@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Spotifyndr</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components/buttons.css') }}">
+    <style>
+        .about-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--color-primary-background);
+            padding: var(--spacing-2xl);
+        }
+
+        .about-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-2xl);
+            padding-bottom: var(--spacing-lg);
+            border-bottom: 1px solid var(--color-hover-state);
+        }
+
+        .about-logo {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-content h1 {
+            font-size: var(--font-size-3xl);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--spacing-lg);
+            color: var(--color-text-primary);
+        }
+
+        .about-content h2 {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-semibold);
+            margin-top: var(--spacing-2xl);
+            margin-bottom: var(--spacing-md);
+            color: var(--color-text-primary);
+        }
+
+        .about-content p {
+            color: var(--color-text-secondary);
+            line-height: 1.8;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .about-content ul {
+            color: var(--color-text-secondary);
+            margin-left: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .about-content li {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        .back-button:hover {
+            color: var(--color-text-primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="about-page">
+        <header class="about-header">
+            <a href="{{ url_for('main.index') }}" class="about-logo">Spotifyndr</a>
+            <a href="{{ url_for('main.index') }}" class="back-button">← Back</a>
+        </header>
+
+        <div class="about-content">
+            <h1>About Spotifyndr</h1>
+            <p>
+                Spotifyndr is a music discovery platform that connects people through their shared love of music. 
+                Using machine learning algorithms, we help you find your "music tribe" - people who have similar 
+                taste in artists, genres, and tracks.
+            </p>
+
+            <h2>Our Mission</h2>
+            <p>
+                We believe that music is better when shared. Our mission is to create a community where music 
+                enthusiasts can discover new music, connect with like-minded individuals, and share their favorite 
+                tracks in real-time.
+            </p>
+
+            <h2>How It Works</h2>
+            <ul>
+                <li><strong>Connect with Spotify:</strong> Sign in with your Spotify account to import your music profile</li>
+                <li><strong>ML-Powered Matching:</strong> Our algorithms analyze your listening history to find similar users</li>
+                <li><strong>Discover & Connect:</strong> Browse recommendations, swipe on profiles, and message your matches</li>
+                <li><strong>Share Music:</strong> Send tracks, playlists, and recommendations to friends in real-time</li>
+            </ul>
+
+            <h2>Privacy & Security</h2>
+            <p>
+                Your privacy is important to us. We use Spotify's OAuth authentication, which means we never see 
+                your password. Your music data is used solely for finding matches and improving recommendations. 
+                You can revoke access at any time through your Spotify account settings.
+            </p>
+
+            <h2>Contact</h2>
+            <p>
+                Have questions or feedback? Visit our <a href="{{ url_for('main.support') }}" style="color: var(--color-accent);">Support page</a> 
+                or reach out to us directly.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

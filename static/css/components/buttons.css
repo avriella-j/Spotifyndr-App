@@ -1,67 +1,156 @@
-/* Button components */
+/* Button components with modern design */
 .btn {
     padding: var(--spacing-sm) var(--spacing-lg);
-    border-radius: var(--border-radius-sm);
+    border-radius: var(--border-radius-md);
     font-size: var(--font-size-md);
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
     transition: all var(--transition-fast);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width var(--transition-normal), height var(--transition-normal);
+}
+
+.btn:hover::before {
+    width: 200%;
+    height: 200%;
 }
 
 .btn-primary {
-    background-color: var(--color-primary);
-    color: var(--color-secondary);
+    background-color: var(--color-accent);
+    color: var(--color-primary-background);
 }
 
 .btn-primary:hover {
-    background-color: var(--color-primary-dark);
+    background-color: #27ae60;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 .btn-secondary {
-    background-color: var(--color-surface);
-    color: var(--color-text);
-    border: 1px solid var(--color-border);
+    background-color: var(--color-elevated-card);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-hover-state);
 }
 
 .btn-secondary:hover {
-    border-color: var(--color-text);
+    background-color: var(--color-hover-state);
+    border-color: var(--color-text-secondary);
+    transform: translateY(-2px);
 }
 
 .btn-danger {
     background-color: var(--color-error);
-    color: var(--color-text);
+    color: var(--color-text-primary);
 }
 
 .btn-danger:hover {
-    opacity: 0.9;
+    background-color: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 .btn-like {
-    background-color: var(--color-primary);
-    color: var(--color-secondary);
+    background-color: var(--color-accent);
+    color: var(--color-primary-background);
     padding: var(--spacing-lg);
     border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    font-size: var(--font-size-xl);
+}
+
+.btn-like:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-lg);
 }
 
 .btn-dislike {
     background-color: var(--color-error);
-    color: var(--color-text);
+    color: var(--color-text-primary);
     padding: var(--spacing-lg);
     border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    font-size: var(--font-size-xl);
+}
+
+.btn-dislike:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-lg);
 }
 
 .btn-follow {
-    background-color: var(--color-primary);
-    color: var(--color-secondary);
+    background-color: var(--color-accent);
+    color: var(--color-primary-background);
     padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: var(--border-radius-lg);
+    font-size: var(--font-size-sm);
+}
+
+.btn-follow:hover {
+    background-color: #27ae60;
+}
+
+.btn-follow.following {
+    background-color: var(--color-elevated-card);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-hover-state);
 }
 
 .btn-play {
-    background-color: var(--color-primary);
-    color: var(--color-secondary);
-    width: 40px;
-    height: 40px;
+    background-color: var(--color-accent);
+    color: var(--color-primary-background);
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: var(--font-size-lg);
+    transition: all var(--transition-normal);
+}
+
+.btn-play:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    padding: var(--spacing-sm);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-lg);
+    transition: color var(--transition-fast);
+}
+
+.btn-icon:hover {
+    color: var(--color-text-primary);
+}
+
+.btn-ghost {
+    background: transparent;
+    color: var(--color-text-secondary);
+    padding: var(--spacing-sm) var(--spacing-md);
+}
+
+.btn-ghost:hover {
+    background-color: var(--color-hover-state);
+    color: var(--color-text-primary);
 }
