@@ -13,13 +13,23 @@ class SpotifyOAuth:
     TOKEN_URL = 'https://accounts.spotify.com/api/token'
     API_URL = 'https://api.spotify.com/v1'
     
-    def __init__(self):
-        self.client_id = current_app.config['SPOTIFY_CLIENT_ID']
-        self.client_secret = current_app.config['SPOTIFY_CLIENT_SECRET']
-        self.redirect_uri = current_app.config['SPOTIFY_REDIRECT_URI']
+    def __init__(self, client_id=None, client_secret=None, redirect_uri=None):
+        self.client_id = client_id
+        self.client_secret = client_secret
+        self.redirect_uri = redirect_uri
+    
+    def _get_config(self):
+        """Get config values from current app if not set during init."""
+        if not self.client_id:
+            self.client_id = current_app.config['SPOTIFY_CLIENT_ID']
+        if not self.client_secret:
+            self.client_secret = current_app.config['SPOTIFY_CLIENT_SECRET']
+        if not self.redirect_uri:
+            self.redirect_uri = current_app.config['SPOTIFY_REDIRECT_URI']
     
     def get_authorization_url(self):
         """Generate authorization URL with PKCE."""
+        self._get_config()
         code_verifier = secrets.token_urlsafe(128)
         code_challenge = base64.urlsafe_b64encode(
             hashlib.sha256(code_verifier.encode()).digest()
@@ -42,6 +52,7 @@ class SpotifyOAuth:
     
     def get_access_token(self, code):
         """Exchange authorization code for access token."""
+        self._get_config()
         auth_header = base64.b64encode(
             f"{self.client_id}:{self.client_secret}".encode()
         ).decode()
@@ -67,6 +78,7 @@ class SpotifyOAuth:
     
     def refresh_access_token(self, refresh_token):
         """Refresh access token using refresh token."""
+        self._get_config()
         auth_header = base64.b64encode(
             f"{self.client_id}:{self.client_secret}".encode()
         ).decode()
