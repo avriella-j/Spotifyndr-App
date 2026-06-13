@@ -1,0 +1,17 @@
+from flask import Blueprint, render_template
+from flask_login import login_required, current_user
+
+main_bp = Blueprint('main', __name__)
+
+
+@main_bp.route('/')
+def index():
+    """Landing page."""
+    return render_template('landing.html')
+
+
+@main_bp.route('/home')
+@login_required
+def home():
+    """Home page for authenticated users."""
+    return render_template('fyp.html')

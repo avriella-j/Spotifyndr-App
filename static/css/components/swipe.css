@@ -1,0 +1,45 @@
+/* Swipe component */
+.swipe-container {
+    position: relative;
+    height: 400px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.swipe-card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-surface);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    transition: transform var(--transition-normal);
+    cursor: grab;
+}
+
+.swipe-card.dragging {
+    cursor: grabbing;
+}
+
+.swipe-card-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.swipe-card-image {
+    flex: 1;
+    object-fit: cover;
+}
+
+.swipe-card-info {
+    padding: var(--spacing-md);
+}
+
+.swipe-controls {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-lg);
+}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Messages - Spotifyndr{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/messaging.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="messaging-page">
+    <div class="conversations-list" id="conversations-list">
+        <!-- Conversations loaded dynamically -->
+    </div>
+    <div class="chat-container" id="chat-container">
+        <div class="messages" id="messages">
+            <!-- Messages loaded dynamically -->
+        </div>
+        <div class="message-input">
+            <input type="text" id="message-input" placeholder="Type a message...">
+            <button class="btn btn-primary" id="send-btn">Send</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/pages/messaging.js') }}"></script>
+{% endblock %}

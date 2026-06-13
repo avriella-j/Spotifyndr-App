@@ -1,0 +1,57 @@
+from flask import Blueprint, redirect, url_for, session, current_app
+from flask_login import login_user, logout_user, login_required, current_user
+
+from app.auth.spotify_oauth import SpotifyOAuth
+from app.models.user import User
+from app.services.user_service import UserService
+
+auth_bp = Blueprint('auth', __name__)
+spotify_oauth = SpotifyOAuth()
+
+
+@auth_bp.route('/login')
+def login():
+    """Initiate Spotify OAuth login flow."""
+    if current_user.is_authenticated:
+        return redirect(url_for('main.index'))
+    
+    auth_url, state = spotify_oauth.get_authorization_url()
+    session['oauth_state'] = state
+    return redirect(auth_url)
+
+
+@auth_bp.route('/callback')
+def callback():
+    """Handle Spotify OAuth callback."""
+    if 'error' in current_app.request.args:
+        return redirect(url_for('main.index'))
+    
+    state = current_app.request.args.get('state')
+    code = current_app.request.args.get('code')
+    
+    if state != session.get('oauth_state'):
+        return redirect(url_for('main.index'))
+    
+    token_data = spotify_oauth.get_access_token(code)
+    user_data = spotify_oauth.get_user_profile(token_data['access_token'])
+    
+    user = UserService.get_or_create_user(
+        spotify_id=user_data['id'],
+        display_name=user_data.get('display_name'),
+        email=user_data.get('email'),
+        images=user_data.get('images', []),
+        access_token=token_data['access_token'],
+        refresh_token=token_data['refresh_token'],
+        expires_at=token_data['expires_at']
+    )
+    
+    login_user(user)
+    return redirect(url_for('main.index'))
+
+
+@auth_bp.route('/logout')
+@login_required
+def logout():
+    """Logout current user."""
+    logout_user()
+    return redirect(url_for('main.index'))

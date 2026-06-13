@@ -1,0 +1,44 @@
+/* Card components */
+.track-card,
+.user-card,
+.playlist-card,
+.artist-card {
+    background-color: var(--color-surface);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-md);
+    transition: transform var(--transition-fast);
+}
+
+.track-card:hover,
+.user-card:hover,
+.playlist-card:hover,
+.artist-card:hover {
+    transform: translateY(-4px);
+}
+
+.track-image,
+.user-image,
+.playlist-image,
+.artist-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: var(--border-radius-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+.track-info,
+.user-info,
+.playlist-info,
+.artist-info h3 {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-xs);
+}
+
+.track-info p,
+.user-info p,
+.playlist-info p,
+.artist-info p {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+}

@@ -1,0 +1,22 @@
+/* FYP page styles */
+.fyp-page {
+    padding: var(--spacing-xl);
+    margin-left: 250px;
+}
+
+.fyp-page h1 {
+    margin-bottom: var(--spacing-lg);
+}
+
+.recommendations-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+}
+
+@media (max-width: 768px) {
+    .fyp-page {
+        margin-left: 0;
+        padding: var(--spacing-md);
+    }
+}

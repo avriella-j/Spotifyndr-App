@@ -1,0 +1,97 @@
+import base64
+import hashlib
+import secrets
+import time
+import requests
+from flask import current_app
+
+
+class SpotifyOAuth:
+    """Spotify OAuth implementation with PKCE flow."""
+    
+    AUTH_URL = 'https://accounts.spotify.com/authorize'
+    TOKEN_URL = 'https://accounts.spotify.com/api/token'
+    API_URL = 'https://api.spotify.com/v1'
+    
+    def __init__(self):
+        self.client_id = current_app.config['SPOTIFY_CLIENT_ID']
+        self.client_secret = current_app.config['SPOTIFY_CLIENT_SECRET']
+        self.redirect_uri = current_app.config['SPOTIFY_REDIRECT_URI']
+    
+    def get_authorization_url(self):
+        """Generate authorization URL with PKCE."""
+        code_verifier = secrets.token_urlsafe(128)
+        code_challenge = base64.urlsafe_b64encode(
+            hashlib.sha256(code_verifier.encode()).digest()
+        ).decode().rstrip('=')
+        
+        state = secrets.token_urlsafe(32)
+        
+        params = {
+            'client_id': self.client_id,
+            'response_type': 'code',
+            'redirect_uri': self.redirect_uri,
+            'scope': 'user-read-private user-read-email user-top-read user-library-read',
+            'state': state,
+            'code_challenge_method': 'S256',
+            'code_challenge': code_challenge
+        }
+        
+        auth_url = f"{self.AUTH_URL}?{'&'.join(f'{k}={v}' for k, v in params.items())}"
+        return auth_url, state
+    
+    def get_access_token(self, code):
+        """Exchange authorization code for access token."""
+        auth_header = base64.b64encode(
+            f"{self.client_id}:{self.client_secret}".encode()
+        ).decode()
+        
+        data = {
+            'grant_type': 'authorization_code',
+            'code': code,
+            'redirect_uri': self.redirect_uri
+        }
+        
+        headers = {
+            'Authorization': f'Basic {auth_header}',
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+        
+        response = requests.post(self.TOKEN_URL, data=data, headers=headers)
+        response.raise_for_status()
+        
+        token_data = response.json()
+        token_data['expires_at'] = int(time.time()) + token_data['expires_in']
+        
+        return token_data
+    
+    def refresh_access_token(self, refresh_token):
+        """Refresh access token using refresh token."""
+        auth_header = base64.b64encode(
+            f"{self.client_id}:{self.client_secret}".encode()
+        ).decode()
+        
+        data = {
+            'grant_type': 'refresh_token',
+            'refresh_token': refresh_token
+        }
+        
+        headers = {
+            'Authorization': f'Basic {auth_header}',
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+        
+        response = requests.post(self.TOKEN_URL, data=data, headers=headers)
+        response.raise_for_status()
+        
+        token_data = response.json()
+        token_data['expires_at'] = int(time.time()) + token_data['expires_in']
+        
+        return token_data
+    
+    def get_user_profile(self, access_token):
+        """Get user profile from Spotify API."""
+        headers = {'Authorization': f'Bearer {access_token}'}
+        response = requests.get(f'{self.API_URL}/me', headers=headers)
+        response.raise_for_status()
+        return response.json()

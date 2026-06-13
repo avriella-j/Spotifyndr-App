@@ -1,0 +1,42 @@
+/* Profile page styles */
+.profile-page {
+    padding: var(--spacing-xl);
+    margin-left: 250px;
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: var(--spacing-md);
+}
+
+.profile-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+}
+
+.top-tracks,
+.top-artists {
+    background-color: var(--color-surface);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius-md);
+}
+
+@media (max-width: 768px) {
+    .profile-page {
+        margin-left: 0;
+        padding: var(--spacing-md);
+    }
+    
+    .profile-content {
+        grid-template-columns: 1fr;
+    }
+}

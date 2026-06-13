@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Spotifyndr - Discover Music Together{% endblock %}
+
+{% block content %}
+<div class="landing-page">
+    <section class="hero">
+        <h1>Discover Music Together</h1>
+        <p>Connect with people who share your music taste</p>
+        <a href="{{ url_for('auth.login') }}" class="btn btn-primary">Login with Spotify</a>
+    </section>
+    
+    <section class="features">
+        <div class="feature">
+            <h3>Personalized Recommendations</h3>
+            <p>ML-powered music suggestions based on your taste</p>
+        </div>
+        <div class="feature">
+            <h3>Find Your Music Tribe</h3>
+            <p>Connect with people who love the same artists</p>
+        </div>
+        <div class="feature">
+            <h3>Real-time Messaging</h3>
+            <p>Chat and share music with friends instantly</p>
+        </div>
+    </section>
+</div>
+{% endblock %}
