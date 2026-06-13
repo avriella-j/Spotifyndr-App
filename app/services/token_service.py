@@ -4,15 +4,21 @@ import os
 
 class TokenService:
     """Encrypt/decrypt tokens, refresh logic."""
-    
+
+    _cached_key = None
+
     @staticmethod
     def get_key():
         """Get encryption key from environment or generate one."""
+        if TokenService._cached_key is not None:
+            return TokenService._cached_key
+
         key = os.environ.get('TOKEN_ENCRYPTION_KEY')
         if not key:
             key = Fernet.generate_key()
-        return key if isinstance(key, bytes) else key.encode()
-    
+        TokenService._cached_key = key if isinstance(key, bytes) else key.encode()
+        return TokenService._cached_key
+
     @staticmethod
     def get_cipher():
         """Get Fernet cipher instance."""

@@ -29,7 +29,7 @@ def callback():
     state = request.args.get('state')
     code = request.args.get('code')
 
-    if state != session.get('oauth_state'):
+    if not code or state != session.get('oauth_state'):
         return redirect(url_for('main.index'))
 
     token_data = spotify_oauth.get_access_token(code)
