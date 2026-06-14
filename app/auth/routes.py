@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, url_for, session, request
+from flask import Blueprint, redirect, url_for, session, request, current_app
 from flask_login import login_user, logout_user, login_required, current_user
 
 from app.auth.spotify_oauth import SpotifyOAuth
@@ -23,17 +23,28 @@ def login():
 @auth_bp.route('/callback')
 def callback():
     """Handle Spotify OAuth callback."""
-    if 'error' in request.args:
+    error = request.args.get('error')
+    if error:
+        app = current_app._get_current_object()
+        app.logger.error(f"Spotify OAuth error: {error}")
         return redirect(url_for('main.index'))
 
     state = request.args.get('state')
     code = request.args.get('code')
 
-    if not code or state != session.get('oauth_state'):
+    if not code:
         return redirect(url_for('main.index'))
 
-    token_data = spotify_oauth.get_access_token(code)
-    user_data = spotify_oauth.get_user_profile(token_data['access_token'])
+    if state != session.get('oauth_state'):
+        return redirect(url_for('main.index'))
+
+    try:
+        token_data = spotify_oauth.get_access_token(code)
+        user_data = spotify_oauth.get_user_profile(token_data['access_token'])
+    except Exception as e:
+        app = current_app._get_current_object()
+        app.logger.error(f"Token exchange failed: {e}")
+        return redirect(url_for('main.index'))
 
     user = UserService.get_or_create_user(
         spotify_id=user_data['id'],
