@@ -1,13 +1,12 @@
 import joblib
 import os
-from flask import current_app
-import redis
 import json
+from flask import current_app
 
 
 class ModelStore:
-    """joblib serialisation + Redis model cache."""
-    
+    """joblib model storage."""
+
     @staticmethod
     def get_model_path(model_name, user_id=None):
         """Get file path for model."""
@@ -20,14 +19,14 @@ class ModelStore:
             current_app.config.get('MODELS_STORE_PATH', 'models_store'),
             f'global_{model_name}.joblib'
         )
-    
+
     @staticmethod
     def save_model(model, model_name, user_id=None):
         """Save model to disk."""
         filepath = ModelStore.get_model_path(model_name, user_id)
         os.makedirs(os.path.dirname(filepath), exist_ok=True)
         joblib.dump(model, filepath)
-    
+
     @staticmethod
     def load_model(model_name, user_id=None):
         """Load model from disk."""
@@ -35,31 +34,15 @@ class ModelStore:
         if os.path.exists(filepath):
             return joblib.load(filepath)
         return None
-    
-    @staticmethod
-    def cache_model_metadata(model_name, metadata, user_id=None):
-        """Cache model metadata in Redis."""
-        cache_key = f"model:{model_name}"
-        if user_id:
-            cache_key = f"model:user_{user_id}:{model_name}"
-        
-        redis_client = redis.from_url(current_app.config['REDIS_URL'])
-        redis_client.setex(
-            cache_key,
-            3600,  # 1 hour cache
-            json.dumps(metadata)
-        )
-    
+
     @staticmethod
     def get_model_metadata(model_name, user_id=None):
-        """Get model metadata from Redis."""
-        cache_key = f"model:{model_name}"
-        if user_id:
-            cache_key = f"model:user_{user_id}:{model_name}"
-        
-        redis_client = redis.from_url(current_app.config['REDIS_URL'])
-        data = redis_client.get(cache_key)
-        
-        if data:
-            return json.loads(data)
+        """Get model metadata from JSON file."""
+        meta_path = os.path.join(
+            current_app.config.get('MODELS_STORE_PATH', 'models_store'),
+            f'{model_name}_metadata.json'
+        )
+        if os.path.exists(meta_path):
+            with open(meta_path) as f:
+                return json.load(f)
         return None

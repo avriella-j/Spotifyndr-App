@@ -1,27 +1,19 @@
 from flask import Flask
-from flask_cors import CORS
-from flask_migrate import Migrate
 
 from app.config import config
-from app.extensions import db, socketio, limiter, login_manager, init_redis
+from app.extensions import db, socketio, login_manager
 
 
 def create_app(config_name='default'):
     """Application factory pattern."""
     app = Flask(__name__)
     app.config.from_object(config[config_name])
-    
+
     # Initialize extensions
     db.init_app(app)
-    socketio.init_app(app, cors_allowed_origins="*", async_mode='eventlet')
-    limiter.init_app(app)
+    socketio.init_app(app, async_mode='eventlet')
     login_manager.init_app(app)
     login_manager.login_view = 'auth.login'
-    CORS(app)
-    Migrate(app, db)
-    
-    # Initialize Redis
-    app.redis = init_redis(app)
     
     # Setup Flask-Login user loader
     from app.models.user import User
