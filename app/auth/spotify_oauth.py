@@ -24,7 +24,7 @@ class SpotifyOAuth:
             self.client_id = current_app.config['SPOTIFY_CLIENT_ID']
         if not self.client_secret:
             self.client_secret = current_app.config['SPOTIFY_CLIENT_SECRET']
-        if not self.redirect_uri:a
+        if not self.redirect_uri:
             self.redirect_uri = current_app.config['SPOTIFY_REDIRECT_URI']
     
     def get_authorization_url(self):
