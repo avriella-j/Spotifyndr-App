@@ -15,8 +15,9 @@ def login():
     if current_user.is_authenticated:
         return redirect(url_for('main.index'))
 
-    auth_url, state = spotify_oauth.get_authorization_url()
+    auth_url, state, code_verifier = spotify_oauth.get_authorization_url()
     session['oauth_state'] = state
+    session['code_verifier'] = code_verifier
     return redirect(auth_url)
 
 
@@ -32,7 +33,7 @@ def callback():
     if not code or state != session.get('oauth_state'):
         return redirect(url_for('main.index'))
 
-    token_data = spotify_oauth.get_access_token(code)
+    token_data = spotify_oauth.get_access_token(code, session.get('code_verifier'))
     user_data = spotify_oauth.get_user_profile(token_data['access_token'])
 
     user = UserService.get_or_create_user(

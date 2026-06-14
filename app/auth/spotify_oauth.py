@@ -3,7 +3,7 @@ import hashlib
 import secrets
 import time
 import requests
-from flask import current_app
+from flask import current_app, session
 
 
 class SpotifyOAuth:
@@ -34,9 +34,9 @@ class SpotifyOAuth:
         code_challenge = base64.urlsafe_b64encode(
             hashlib.sha256(code_verifier.encode()).digest()
         ).decode().rstrip('=')
-        
+
         state = secrets.token_urlsafe(32)
-        
+
         params = {
             'client_id': self.client_id,
             'response_type': 'code',
@@ -46,29 +46,54 @@ class SpotifyOAuth:
             'code_challenge_method': 'S256',
             'code_challenge': code_challenge
         }
-        
+
         auth_url = f"{self.AUTH_URL}?{'&'.join(f'{k}={v}' for k, v in params.items())}"
-        return auth_url, state
-    
-    def get_access_token(self, code):
+        return auth_url, state, code_verifier
+
+    def get_access_token(self, code, code_verifier=None):
         """Exchange authorization code for access token."""
         self._get_config()
+
+        app = current_app._get_current_object()
+        app.logger.error(f"=== TOKEN EXCHANGE DEBUG ===")
+        app.logger.error(f"client_id exists: {bool(self.client_id)}")
+        app.logger.error(f"client_secret exists: {bool(self.client_secret)}")
+        app.logger.error(f"redirect_uri: {self.redirect_uri}")
+        app.logger.error(f"code_verifier provided: {bool(code_verifier)}")
+        app.logger.error(f"stored code_verifier: {session.get('code_verifier')}")
+
         auth_header = base64.b64encode(
             f"{self.client_id}:{self.client_secret}".encode()
         ).decode()
-        
+
+        # Use provided verifier or fall back to session
+        verifier = code_verifier or session.get('code_verifier')
+
         data = {
             'grant_type': 'authorization_code',
             'code': code,
-            'redirect_uri': self.redirect_uri
+            'redirect_uri': self.redirect_uri,
+            'client_id': self.client_id
         }
-        
+
+        if verifier:
+            data['code_verifier'] = verifier
+            app.logger.error(f"Sending code_verifier: {verifier[:20]}...")
+
         headers = {
             'Authorization': f'Basic {auth_header}',
             'Content-Type': 'application/x-www-form-urlencoded'
         }
-        
+
         response = requests.post(self.TOKEN_URL, data=data, headers=headers)
+
+        app.logger.error(f"Spotify response status: {response.status_code}")
+        app.logger.error(f"Spotify response body: {response.text}")
+
+        if not response.ok:
+            app.logger.error(f"=== SPOTIFY ERROR ===")
+            app.logger.error(response.text)
+
         response.raise_for_status()
         
         token_data = response.json()

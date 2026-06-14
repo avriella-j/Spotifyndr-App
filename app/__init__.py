@@ -6,7 +6,11 @@ from app.extensions import db, socketio, login_manager
 
 def create_app(config_name='default'):
     """Application factory pattern."""
-    app = Flask(__name__)
+    app = Flask(
+        __name__,
+        static_folder="app/static",
+        template_folder="app/templates"
+    )
     app.config.from_object(config[config_name])
 
     # Initialize extensions
