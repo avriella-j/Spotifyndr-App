@@ -8,8 +8,8 @@ def create_app(config_name='default'):
     """Application factory pattern."""
     app = Flask(
         __name__,
-        static_folder="app/static",
-        template_folder="app/templates"
+        static_folder="static",
+        template_folder="templates"
     )
     app.config.from_object(config[config_name])
 
