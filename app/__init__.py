@@ -1,7 +1,8 @@
 from flask import Flask
 
 from app.config import config
-from app.extensions import db, socketio, login_manager
+from app.extensions import db, socketio, login_manager, migrate
+
 
 
 def create_app(config_name='default'):
@@ -15,8 +16,10 @@ def create_app(config_name='default'):
 
     # Initialize extensions
     db.init_app(app)
+    migrate.init_app(app, db)
     socketio.init_app(app, async_mode='eventlet')
     login_manager.init_app(app)
+
     login_manager.login_view = 'auth.login'
     
     # Setup Flask-Login user loader
