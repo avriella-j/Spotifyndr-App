@@ -1,8 +1,10 @@
 /* Messaging page styles */
 .messaging-page {
     display: flex;
-    height: calc(100vh - 64px);
+    height: auto;
+    min-height: 540px;
 }
+
 
 .conversations-list {
     width: 300px;

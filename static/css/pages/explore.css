@@ -1,7 +1,9 @@
 /* Explore page styles */
 .explore-page {
-    padding: var(--spacing-2xl);
+    /* retained for backward compatibility; styling now handled by shared marketing frame */
+    padding: 0;
 }
+
 
 .explore-page h1 {
     font-size: var(--font-size-3xl);

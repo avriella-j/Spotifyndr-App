@@ -1,8 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "base.html" %}
+
+{% block title %}About - Spotifyndr{% endblock %}
+
+{% block content %}
+<div class="about-page">
+
+    
     <title>About - Spotifyndr</title>
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -164,10 +167,10 @@
             .about-body { padding: 0 16px 48px; }
             .landing-header { padding: 16px; }
         }
-    </style>
-</head>
-<body>
+</style>
+
     <header class="landing-header">
+
         <a href="/" class="landing-logo">
             <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="12" cy="12" r="12" fill="#1ED760"/>
@@ -209,5 +212,6 @@
             <p>Have questions or feedback? Visit our <a href="/support" class="accent-link">Support page</a> or reach out to us directly.</p>
         </div>
     </div>
-</body>
-</html>
+</div>
+{% endblock %>
+

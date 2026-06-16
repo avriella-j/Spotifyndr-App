@@ -1,7 +1,9 @@
 /* Mutuals page styles */
 .mutuals-page {
-    padding: var(--spacing-2xl);
+    /* retained for backward compatibility; styling now handled by shared marketing frame */
+    padding: 0;
 }
+
 
 .mutuals-page h1 {
     font-size: var(--font-size-3xl);

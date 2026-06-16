@@ -1,8 +1,10 @@
 /* Settings page styles */
 .settings-page {
-    padding: var(--spacing-2xl);
+    /* retained for backward compatibility; styling now handled by shared marketing frame */
+    padding: 0;
     max-width: 600px;
 }
+
 
 .settings-page h1 {
     font-size: var(--font-size-3xl);
