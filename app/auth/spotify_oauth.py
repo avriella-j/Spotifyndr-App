@@ -65,8 +65,18 @@ class SpotifyOAuth:
 
         if not response.ok:
             app = current_app._get_current_object()
-            app.logger.error(f"Spotify token error: {response.status_code}")
-            app.logger.error(f"Response: {response.text}")
+
+            app.logger.error(
+                f"Spotify token error {response.status_code}"
+            )
+
+            app.logger.error(
+                f"Redirect URI: {self.redirect_uri}"
+            )
+
+            app.logger.error(
+                f"Response body: {response.text}"
+            )
 
         response.raise_for_status()
 
