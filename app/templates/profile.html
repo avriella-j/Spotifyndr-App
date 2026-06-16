@@ -7,30 +7,25 @@
 {% endblock %}
 
 {% block content %}
-<div class="marketing-page">
-    <div class="marketing-hero">
+<div class="profile-page">
+    <div class="profile-header">
+        <img src="{{ current_user.image_url or url_for('static', filename='img/default-avatar.svg') }}" alt="Profile" class="profile-image">
         <h1>{{ current_user.display_name }}</h1>
         <p>{{ current_user.email }}</p>
     </div>
-
-    <div class="marketing-section">
-        <div class="profile-header">
-            <img src="{{ current_user.image_url or url_for('static', filename='img/default-avatar.svg') }}" alt="Profile" class="profile-image">
-        </div>
-
-        <div class="profile-content">
-            <div class="top-tracks">
-                <h2>Top Tracks</h2>
-                <div id="top-tracks">
-                    <!-- Top tracks loaded dynamically -->
-                </div>
+    
+    <div class="profile-content">
+        <div class="top-tracks">
+            <h2>Top Tracks</h2>
+            <div id="top-tracks">
+                <!-- Top tracks loaded dynamically -->
             </div>
-
-            <div class="top-artists">
-                <h2>Top Artists</h2>
-                <div id="top-artists">
-                    <!-- Top artists loaded dynamically -->
-                </div>
+        </div>
+        
+        <div class="top-artists">
+            <h2>Top Artists</h2>
+            <div id="top-artists">
+                <!-- Top artists loaded dynamically -->
             </div>
         </div>
     </div>

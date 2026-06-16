@@ -7,20 +7,14 @@
 {% endblock %}
 
 {% block content %}
-<div class="marketing-page">
-    <div class="marketing-hero">
-        <h1>Explore</h1>
-        <p>Swipe through recommendations tailored to your taste.</p>
+<div class="explore-page">
+    <h1>Explore</h1>
+    <div class="swipe-container" id="swipe-container">
+        <!-- Swipe cards loaded dynamically -->
     </div>
-
-    <div class="marketing-section">
-        <div class="swipe-container" id="swipe-container">
-            <!-- Swipe cards loaded dynamically -->
-        </div>
-        <div class="swipe-controls">
-            <button class="btn btn-dislike" id="dislike-btn">✕</button>
-            <button class="btn btn-like" id="like-btn">♥</button>
-        </div>
+    <div class="swipe-controls">
+        <button class="btn btn-dislike" id="dislike-btn">✕</button>
+        <button class="btn btn-like" id="like-btn">♥</button>
     </div>
 </div>
 {% endblock %}

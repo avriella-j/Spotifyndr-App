@@ -1,9 +1,7 @@
 /* Profile page styles */
 .profile-page {
-    /* retained for backward compatibility; styling now handled by shared marketing frame */
-    padding: 0;
+    padding: var(--spacing-2xl);
 }
-
 
 .profile-header {
     text-align: center;
