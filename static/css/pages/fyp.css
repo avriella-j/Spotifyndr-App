@@ -1,99 +1,19 @@
-/* For You page - Instagram-style feed */
+/* For You page styles */
 .fyp-page {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: var(--spacing-lg);
+    padding: var(--spacing-2xl);
 }
 
 .fyp-page h1 {
-    font-size: var(--font-size-2xl);
+    font-size: var(--font-size-3xl);
     font-weight: var(--font-weight-bold);
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: var(--spacing-2xl);
     color: var(--color-text-primary);
 }
 
 .recommendations-container {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: var(--spacing-lg);
-}
-
-/* Feed-style recommendation card */
-.feed-card {
-    background-color: var(--color-surface);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    transition: transform var(--transition-fast);
-}
-
-.feed-card:hover {
-    transform: translateY(-2px);
-}
-
-.feed-card-header {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-md);
-    padding: var(--spacing-md);
-}
-
-.feed-card-avatar {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.feed-card-user {
-    flex: 1;
-}
-
-.feed-card-name {
-    font-size: var(--font-size-md);
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-text-primary);
-}
-
-.feed-card-taste {
-    font-size: var(--font-size-sm);
-    color: var(--color-text-secondary);
-}
-
-.feed-card-image {
-    width: 100%;
-    aspect-ratio: 1;
-    object-fit: cover;
-    background-color: var(--color-subtle);
-}
-
-.feed-card-body {
-    padding: var(--spacing-md);
-}
-
-.feed-card-body h3 {
-    font-size: var(--font-size-md);
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-text-secondary);
-    margin-bottom: var(--spacing-sm);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-.feed-card-tracks {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.feed-card-tracks li {
-    font-size: var(--font-size-md);
-    color: var(--color-text-primary);
-    padding: var(--spacing-xs) 0;
-}
-
-.feed-card-actions {
-    padding: var(--spacing-md);
-    border-top: 1px solid var(--color-subtle);
 }
 
 .recommendation-section {
@@ -101,7 +21,7 @@
 }
 
 .recommendation-section h2 {
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-2xl);
     font-weight: var(--font-weight-semibold);
     margin-bottom: var(--spacing-lg);
     color: var(--color-text-primary);
@@ -114,7 +34,7 @@
 }
 
 .skeleton-card {
-    background-color: var(--color-elevated);
-    border-radius: var(--radius-lg);
+    background-color: var(--color-elevated-card);
+    border-radius: var(--border-radius-lg);
     padding: var(--spacing-md);
 }

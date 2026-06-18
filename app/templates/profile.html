@@ -9,30 +9,23 @@
 {% block content %}
 <div class="profile-page">
     <div class="profile-header">
-        <img src="{{ current_user.image_url or url_for('static', filename='img/default-avatar.svg') }}" alt="Profile" class="profile-avatar">
-        <h1 class="profile-name">{{ current_user.display_name }}</h1>
-        <div class="profile-stats">
-            <div class="stat-item">
-                <span class="stat-value" id="followers-count">0</span>
-                <span class="stat-label">Followers</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-value" id="following-count">0</span>
-                <span class="stat-label">Following</span>
-            </div>
-        </div>
+        <img src="{{ current_user.image_url or url_for('static', filename='img/default-avatar.svg') }}" alt="Profile" class="profile-image">
+        <h1>{{ current_user.display_name }}</h1>
+        <p>{{ current_user.email }}</p>
     </div>
     
     <div class="profile-content">
-        <div class="top-section">
-            <h2 class="section-title">Top Tracks</h2>
-            <div class="horizontal-scroll" id="top-tracks">
+        <div class="top-tracks">
+            <h2>Top Tracks</h2>
+            <div id="top-tracks">
+                <!-- Top tracks loaded dynamically -->
             </div>
         </div>
         
-        <div class="top-section">
-            <h2 class="section-title">Top Artists</h2>
-            <div class="horizontal-scroll" id="top-artists">
+        <div class="top-artists">
+            <h2>Top Artists</h2>
+            <div id="top-artists">
+                <!-- Top artists loaded dynamically -->
             </div>
         </div>
     </div>

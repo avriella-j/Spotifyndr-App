@@ -8,12 +8,49 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/components/navigation.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/components/cards.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/components/buttons.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/components/modals.css') }}">
     {% block extra_css %}{% endblock %}
 </head>
 <body>
-    {% include 'partials/_nav_sidebar.html' %}
-    {% include 'partials/_nav_mobile.html' %}
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+        <a href="{{ url_for('main.index') }}" class="mobile-header-logo">Spotifyndr</a>
+        <button class="menu-toggle burger-btn" id="menu-toggle" aria-label="Menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+    </header>
+
+    <!-- Mobile Navigation Menu -->
+    <nav class="mobile-nav-menu" id="mobile-nav-menu">
+        <a href="{{ url_for('main.home') }}">Home</a>
+        <a href="{{ url_for('explore.explore') }}">Explore</a>
+        <a href="{{ url_for('fyp.fyp') }}">For You</a>
+        <a href="{{ url_for('mutuals.mutuals') }}">Find Mutuals</a>
+        <a href="{{ url_for('messaging.messaging') }}">Messages</a>
+        <a href="{{ url_for('profile.profile') }}">Profile</a>
+        <a href="{{ url_for('settings.settings') }}">Settings</a>
+        <a href="{{ url_for('auth.logout') }}">Logout</a>
+    </nav>
+
+    <!-- Desktop Sidebar -->
+    <nav class="nav-sidebar">
+        <div class="nav-brand">
+            <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="Spotifyndr">
+        </div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('main.home') }}" class="nav-link">Home</a></li>
+            <li><a href="{{ url_for('fyp.fyp') }}" class="nav-link">For You</a></li>
+            <li><a href="{{ url_for('explore.explore') }}" class="nav-link">Explore</a></li>
+            <li><a href="{{ url_for('mutuals.mutuals') }}" class="nav-link">Find Mutuals</a></li>
+            <li><a href="{{ url_for('messaging.messaging') }}" class="nav-link">Messages</a></li>
+            <li><a href="{{ url_for('profile.profile') }}" class="nav-link">Profile</a></li>
+            <li><a href="{{ url_for('settings.settings') }}" class="nav-link">Settings</a></li>
+        </ul>
+        <div class="nav-footer">
+            <a href="{{ url_for('auth.logout') }}" class="nav-link">Logout</a>
+        </div>
+    </nav>
 
     <!-- Main Content -->
     <div class="app-layout">
@@ -25,7 +62,7 @@
     <!-- Bottom Navigation (Mobile) -->
     <nav class="bottom-nav" aria-label="Bottom navigation">
         <ul class="bottom-nav-items">
-            <li><a href="{{ url_for('explore.explore') }}" class="bottom-nav-item {% if request.endpoint and 'explore' in request.endpoint %}active{% endif %}">
+            <li><a href="{{ url_for('explore.explore') }}" class="bottom-nav-item">
                 <span class="bottom-nav-icon">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="11" cy="11" r="8"></circle>
@@ -34,7 +71,7 @@
                 </span>
                 <span>Explore</span>
             </a></li>
-            <li><a href="{{ url_for('fyp.fyp') }}" class="bottom-nav-item {% if request.endpoint and 'fyp' in request.endpoint %}active{% endif %}">
+            <li><a href="{{ url_for('fyp.fyp') }}" class="bottom-nav-item">
                 <span class="bottom-nav-icon">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M9 18V5l12-2v13"></path>
@@ -44,7 +81,7 @@
                 </span>
                 <span>For You</span>
             </a></li>
-            <li><a href="{{ url_for('mutuals.mutuals') }}" class="bottom-nav-item {% if request.endpoint and 'mutuals' in request.endpoint %}active{% endif %}">
+            <li><a href="{{ url_for('mutuals.mutuals') }}" class="bottom-nav-item">
                 <span class="bottom-nav-icon">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
@@ -55,7 +92,7 @@
                 </span>
                 <span>Mutuals</span>
             </a></li>
-            <li><a href="{{ url_for('messaging.messaging') }}" class="bottom-nav-item {% if request.endpoint and 'messaging' in request.endpoint %}active{% endif %}">
+            <li><a href="{{ url_for('messaging.messaging') }}" class="bottom-nav-item">
                 <span class="bottom-nav-icon">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
@@ -63,7 +100,7 @@
                 </span>
                 <span>Messages</span>
             </a></li>
-            <li><a href="{{ url_for('profile.profile') }}" class="bottom-nav-item {% if request.endpoint and 'profile' in request.endpoint %}active{% endif %}">
+            <li><a href="{{ url_for('profile.profile') }}" class="bottom-nav-item">
                 <span class="bottom-nav-icon">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
@@ -84,14 +121,22 @@
     <script src="{{ url_for('static', filename='js/core/utils.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script>
-        // Mobile menu toggle (backward compat with inline menu)
+        // Mobile menu toggle
         document.addEventListener('DOMContentLoaded', function() {
             const menuToggle = document.getElementById('menu-toggle');
-            const mobileNavMenu = document.getElementById('nav-menu');
+            const mobileNavMenu = document.getElementById('mobile-nav-menu');
 
             if (menuToggle && mobileNavMenu) {
                 menuToggle.addEventListener('click', function() {
                     mobileNavMenu.classList.toggle('open');
+                    menuToggle.classList.toggle('open');
+                });
+
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!mobileNavMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+                        mobileNavMenu.classList.remove('open');
+                    }
                 });
             }
         });

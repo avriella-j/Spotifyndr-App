@@ -1,159 +1,26 @@
-/* Explore page - Tinder-style swipe */
+/* Explore page styles */
 .explore-page {
-    max-width: 480px;
-    margin: 0 auto;
-    padding: var(--spacing-lg);
-    text-align: center;
+    padding: var(--spacing-2xl);
 }
 
 .explore-page h1 {
-    font-size: var(--font-size-2xl);
+    font-size: var(--font-size-3xl);
     font-weight: var(--font-weight-bold);
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: var(--spacing-2xl);
     color: var(--color-text-primary);
-    text-align: left;
 }
 
 .swipe-container {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
     min-height: 500px;
     position: relative;
 }
 
-/* Tinder-style swipe card stack */
-.swipe-container {
-    position: relative;
-    width: 100%;
-    max-width: 400px;
-    height: 480px;
-    margin: 0 auto;
-}
-
-.swipe-card {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    background-color: var(--color-surface);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-    cursor: grab;
-    user-select: none;
-    transition: transform var(--transition-normal);
-}
-
-.swipe-card-content {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.swipe-card-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.swipe-card-info {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: var(--spacing-lg);
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
-}
-
-.swipe-card-info h3 {
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-bold);
-    color: #ffffff;
-    margin-bottom: var(--spacing-xs);
-}
-
-.swipe-card-info p {
-    font-size: var(--font-size-md);
-    color: var(--color-text-secondary);
-}
-
 .swipe-controls {
     display: flex;
     justify-content: center;
-    gap: var(--spacing-2xl);
+    gap: var(--spacing-lg);
     margin-top: var(--spacing-xl);
-    padding-bottom: var(--spacing-lg);
-}
-
-.swipe-empty {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    color: var(--color-text-secondary);
-    text-align: center;
-    gap: var(--spacing-md);
-    padding: var(--spacing-lg);
-}
-
-.swipe-empty svg {
-    opacity: 0.5;
-}
-
-.swipe-empty p {
-    font-size: var(--font-size-lg);
-}
-
-.btn-dislike {
-    background-color: transparent;
-    color: #e74c3c;
-    border: 2px solid #e74c3c;
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    transition: all var(--transition-fast);
-}
-
-.btn-dislike:hover {
-    background-color: #e74c3c;
-    color: #ffffff;
-    transform: scale(1.05);
-}
-
-.btn-like {
-    background-color: transparent;
-    color: var(--color-spotify-green);
-    border: 2px solid var(--color-spotify-green);
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    transition: all var(--transition-fast);
-}
-
-.btn-like:hover {
-    background-color: var(--color-spotify-green);
-    color: #000000;
-    transform: scale(1.05);
-}
-
-.swipe-no-more {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 480px;
-    color: var(--color-text-secondary);
-    font-size: var(--font-size-lg);
-    text-align: center;
-    gap: var(--spacing-md);
 }
