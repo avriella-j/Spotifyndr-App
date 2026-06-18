@@ -50,9 +50,31 @@
     margin-bottom: var(--spacing-xl);
 }
 
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
 .nav-brand img {
     height: 32px;
     width: auto;
+}
+
+.nav-brand svg {
+    flex-shrink: 0;
+}
+
+.nav-brand-text {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+}
+
+@media (max-width: 1024px) {
+    .nav-sidebar .nav-brand-text {
+        display: none;
+    }
 }
 
 .nav-links {
@@ -83,6 +105,20 @@
     color: var(--color-spotify-green);
     background-color: rgba(30, 215, 96, 0.1);
     border-left-color: var(--color-spotify-green);
+}
+
+.nav-link svg {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+}
+
+.nav-link.nav-logout {
+    color: var(--color-text-secondary);
+}
+
+.nav-link.nav-logout:hover {
+    color: var(--color-error);
 }
 
 .nav-footer {
@@ -261,7 +297,11 @@
 }
 
 /* Active state indicator */
-.nav-link::before {
+.nav-sidebar .nav-link {
+    position: relative;
+}
+
+.nav-sidebar .nav-link::before {
     content: '';
     position: absolute;
     left: 0;
@@ -273,6 +313,6 @@
     transition: height var(--transition-fast);
 }
 
-.nav-link.active::before {
+.nav-sidebar .nav-link.active::before {
     height: 24px;
 }

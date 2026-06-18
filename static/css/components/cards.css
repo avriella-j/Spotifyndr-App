@@ -32,6 +32,15 @@
     background-color: var(--color-elevated);
 }
 
+.track-image {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--spacing-md);
+    background-color: var(--color-subtle);
+}
+
 .track-artwork {
     width: 100%;
     aspect-ratio: 1;
@@ -39,6 +48,23 @@
     border-radius: var(--radius-sm);
     margin-bottom: var(--spacing-md);
     background-color: var(--color-subtle);
+}
+
+.track-info h3 {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.track-info p {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .track-title {
@@ -74,6 +100,15 @@
     background-color: var(--color-elevated);
 }
 
+.user-image {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: var(--spacing-md);
+    background-color: var(--color-subtle);
+}
+
 .user-avatar {
     width: 100%;
     aspect-ratio: 1;
@@ -81,6 +116,13 @@
     border-radius: 50%;
     margin-bottom: var(--spacing-md);
     background-color: var(--color-subtle);
+}
+
+.user-info h3 {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-xs);
 }
 
 .user-name {
@@ -116,6 +158,24 @@
     border-radius: 50%;
     margin-bottom: var(--spacing-md);
     background-color: var(--color-subtle);
+}
+
+.artist-info h3 {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-xs);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.artist-info p {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .artist-name {

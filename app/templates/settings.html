@@ -10,15 +10,15 @@
 <div class="settings-page">
     <h1>Settings</h1>
     
-    <form id="settings-form">
+    <form id="settings-form" class="settings-form">
         <div class="form-group">
             <label for="display-name">Display Name</label>
-            <input type="text" id="display-name" name="display_name" value="{{ current_user.display_name }}">
+            <input type="text" id="display-name" name="display_name" value="{{ current_user.display_name }}" placeholder="Your display name">
         </div>
         
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" value="{{ current_user.email }}">
+            <input type="email" id="email" name="email" value="{{ current_user.email }}" placeholder="you@example.com">
         </div>
         
         <button type="submit" class="btn btn-primary">Save Changes</button>
@@ -26,6 +26,7 @@
     
     <div class="danger-zone">
         <h2>Danger Zone</h2>
+        <p>Once you delete your account, there is no going back. Please be certain.</p>
         <button class="btn btn-danger" id="delete-account">Delete Account</button>
     </div>
 </div>

@@ -8,7 +8,7 @@
         <img src="{{ artist.image_url }}" alt="{{ artist.name }}" class="artist-cover">
         <div class="artist-info">
             <h1>{{ artist.name }}</h1>
-            <p class="artist-followers">{{ artist.followers|number_format }} followers</p>
+            <p class="artist-followers">{{ artist.followers }} followers</p>
             <p class="artist-genres">{{ artist.genres|join(', ') }}</p>
             <div class="artist-actions">
                 <button class="btn btn-follow">Follow</button>
@@ -75,7 +75,7 @@
 
     .artist-genres {
         font-size: var(--font-size-md);
-        color: var(--color-text-muted);
+        color: var(--color-text-subdued);
         margin-bottom: var(--spacing-lg);
     }
 
@@ -109,13 +109,13 @@
         display: flex;
         align-items: center;
         padding: var(--spacing-md);
-        background-color: var(--color-elevated-card);
-        border-radius: var(--border-radius-md);
+        background-color: var(--color-elevated);
+        border-radius: var(--radius-md);
         transition: background-color var(--transition-fast);
     }
 
     .track-item:hover {
-        background-color: var(--color-hover-state);
+        background-color: var(--color-subtle);
     }
 
     .albums-grid,

@@ -35,14 +35,14 @@
 .audio-player-progress {
     flex: 2;
     height: 4px;
-    background-color: var(--color-border);
+    background-color: var(--color-subtle);
     border-radius: 2px;
     position: relative;
 }
 
 .audio-player-progress-bar {
     height: 100%;
-    background-color: var(--color-primary);
+    background-color: var(--color-spotify-green);
     border-radius: 2px;
     width: 0%;
 }

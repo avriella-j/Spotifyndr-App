@@ -1,87 +1,178 @@
-/* Messaging page styles */
+/* Messaging page - Instagram DM style */
 .messaging-page {
     display: flex;
-    height: calc(100vh - 64px);
+    height: calc(100vh - var(--header-height));
+    max-width: 960px;
+    margin: 0 auto;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background-color: var(--color-primary-background);
 }
 
 .conversations-list {
-    width: 300px;
-    background-color: var(--color-secondary-background);
-    border-right: 1px solid var(--color-hover-state);
+    width: 320px;
+    background-color: var(--color-surface);
+    border-right: 1px solid var(--color-subtle);
     overflow-y: auto;
+    flex-shrink: 0;
 }
 
 .conversation-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
     padding: var(--spacing-md);
-    border-bottom: 1px solid var(--color-hover-state);
+    border-bottom: 1px solid var(--color-subtle);
     cursor: pointer;
     transition: background-color var(--transition-fast);
 }
 
 .conversation-item:hover {
-    background-color: var(--color-hover-state);
+    background-color: var(--color-elevated);
 }
 
 .conversation-item.active {
-    background-color: var(--color-elevated-card);
+    background-color: var(--color-elevated);
+}
+
+.conversation-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    background-color: var(--color-subtle);
+}
+
+.conversation-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.conversation-name {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    margin-bottom: 2px;
+}
+
+.conversation-preview {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .chat-container {
     flex: 1;
     display: flex;
     flex-direction: column;
+    background-color: var(--color-primary-background);
+}
+
+.chat-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--color-subtle);
+    background-color: var(--color-surface);
+}
+
+.chat-header h3 {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
 }
 
 .messages {
     flex: 1;
     overflow-y: auto;
     padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
 }
 
 .message {
-    margin-bottom: var(--spacing-md);
-    padding: var(--spacing-sm) var(--spacing-md);
-    border-radius: var(--border-radius-md);
     max-width: 70%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-lg);
+    font-size: var(--font-size-md);
+    line-height: 1.4;
+    word-wrap: break-word;
 }
 
 .message.sent {
-    background-color: var(--color-accent);
-    color: var(--color-primary-background);
+    background-color: var(--color-spotify-green);
+    color: #000000;
     margin-left: auto;
+    border-bottom-right-radius: var(--radius-sm);
 }
 
 .message.received {
-    background-color: var(--color-elevated-card);
+    background-color: var(--color-elevated);
+    color: var(--color-text-primary);
+    margin-right: auto;
+    border-bottom-left-radius: var(--radius-sm);
+}
+
+.message-time {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    margin-top: var(--spacing-xs);
+    opacity: 0.7;
 }
 
 .message-input {
     display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
     padding: var(--spacing-md);
-    border-top: 1px solid var(--color-hover-state);
+    border-top: 1px solid var(--color-subtle);
+    background-color: var(--color-surface);
 }
 
 .message-input input {
     flex: 1;
     padding: var(--spacing-sm) var(--spacing-md);
-    border: 1px solid var(--color-hover-state);
-    border-radius: var(--border-radius-md);
-    background-color: var(--color-secondary-background);
+    border: 1px solid var(--color-subtle);
+    border-radius: var(--radius-pill);
+    background-color: var(--color-primary-background);
     color: var(--color-text-primary);
+    font-size: var(--font-size-md);
+    outline: none;
 }
 
 .message-input input:focus {
-    outline: none;
-    border-color: var(--color-accent);
+    border-color: var(--color-spotify-green);
+}
+
+.no-conversation-selected {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-secondary);
+    gap: var(--spacing-md);
 }
 
 @media (max-width: 768px) {
     .messaging-page {
         flex-direction: column;
+        height: calc(100vh - var(--header-height) - 60px);
+        border-radius: 0;
     }
 
     .conversations-list {
         width: 100%;
-        height: 200px;
+        max-height: 200px;
+    }
+
+    .chat-container {
+        height: 0;
+        flex: 1;
     }
 }
